@@ -22,9 +22,9 @@ namespace Demo01
 
                 x.RunAsLocalSystem();
 
-                x.SetDescription("Sample Topshelf");
-                x.SetDisplayName("stuff");
-                x.SetServiceName("stuff");
+                x.SetDescription("TopshelfTest");
+                x.SetDisplayName("TopshelfTest");
+                x.SetServiceName("TopshelfTest");
             });
         }
     }
