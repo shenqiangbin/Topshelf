@@ -63,6 +63,9 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="log4net.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="packages.config" />
     <None Include="脚本\启动.bat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

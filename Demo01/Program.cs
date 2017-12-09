@@ -13,6 +13,8 @@ namespace Demo01
         {
             HostFactory.Run(x =>
             {
+                x.UseLog4Net("log4net.config");
+
                 x.Service<TownCrier>(s =>
                 {
                     s.ConstructUsing(name => new TownCrier());
