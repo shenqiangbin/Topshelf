@@ -24,9 +24,9 @@ namespace Demo01
 
                 x.RunAsLocalSystem();
 
-                x.SetDescription("TopshelfTest");
-                x.SetDisplayName("TopshelfTest");
-                x.SetServiceName("TopshelfTest");
+                x.SetDescription("这里是服务的描述");
+                x.SetDisplayName("这里是展示名称");
+                x.SetServiceName("这是服务名称");
             });
         }
     }
