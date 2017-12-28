@@ -13,42 +13,51 @@ namespace Law.Monitor.Core
         public SendResult Send(string url)
         {
             SendResult result = new SendResult();
+            WebResponse response = null;
             try
             {
                 HttpWebRequest request = HttpWebRequest.Create(url) as HttpWebRequest;
 
                 request.Method = "Get";
+                request.UserAgent = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.63 Safari/537.36";
                 request.ContentType = "text/html,application/xhtml+xml,application/xml,application/json";
-                request.Timeout = 80000; //8s
-                WebResponse response = request.GetResponse();
+                request.Timeout = 1000 * 8; //8s
+                response = request.GetResponse();
                 HttpWebResponse webResponse = (HttpWebResponse)response;
                 result.Code = webResponse.StatusCode;
                 if (webResponse.StatusCode == HttpStatusCode.OK)
                 {
                     result.Success = true;
-                }else
+                }
+                else
                 {
                     result.Success = false;
                 }
+                response.Close();
             }
             catch (WebException ex)
             {
-                HttpWebResponse response = (HttpWebResponse)ex.Response;
-                if (response == null)
+                HttpWebResponse webResponse = (HttpWebResponse)ex.Response;
+                if (webResponse == null)
                 {
                     result.Success = false;
                 }
                 else
                 {
-                    result.Code = response.StatusCode;
+                    result.Code = webResponse.StatusCode;
 
-                    if (response.StatusCode == HttpStatusCode.ServiceUnavailable)
+                    if (webResponse.StatusCode == HttpStatusCode.ServiceUnavailable)
                         result.Success = false;
                     else
                         result.Success = true;
                 }
 
                 result.Msg = ex.Status + ex.Message;
+            }
+            finally
+            {
+                if (response != null)
+                    response.Close();
             }
 
             return result;
