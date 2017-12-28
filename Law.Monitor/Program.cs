@@ -19,9 +19,9 @@ namespace Law.Monitor
 
                 x.RunAsLocalSystem();
 
-                x.SetDescription("ant.test.description");
-                x.SetDisplayName("ant.test.testService");
-                x.SetServiceName("ant.test.testService");
+                x.SetDescription("¼à¿Ø·þÎñ");
+                x.SetDisplayName("law.monitor");
+                x.SetServiceName("law.monitor");
 
                 x.Service(factory =>
                 {

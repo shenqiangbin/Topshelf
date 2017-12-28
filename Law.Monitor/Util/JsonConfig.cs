@@ -14,7 +14,7 @@ namespace Law.Monitor.Util
     {
         private static LogWriter logger = HostLogger.Get<JsonConfig>();
 
-        private static string JsonPath = AppDomain.CurrentDomain.BaseDirectory + "config.txt";
+        private static string JsonPath = AppDomain.CurrentDomain.BaseDirectory + "config.json";
         private static object getLocker = new object();
         private static object addLocker = new object();
 
@@ -24,7 +24,10 @@ namespace Law.Monitor.Util
             {
                 JObject obj = ReadJsonObj(JsonPath);
                 JToken token = obj.GetValue(key);
-                return token.Value<string>();
+                if (token == null)
+                    return "";
+                else
+                    return token.Value<string>();
             }
         }
 
@@ -87,7 +90,7 @@ namespace Law.Monitor.Util
         {
             try
             {
-                System.IO.File.WriteAllText(jsonPath, jsonStr, Encoding.Default);
+                System.IO.File.WriteAllText(jsonPath, jsonStr, Encoding.UTF8);
                 return true;
             }
             catch (System.Exception ex)

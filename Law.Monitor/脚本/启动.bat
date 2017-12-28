@@ -3,11 +3,11 @@
 cd /d %~dp0
 cd ..
 
-call demo01.exe start
+call Law.Monitor.exe start
 
 echo; 
 
-echo Íê³É
+echo success
 
 echo; 
 echo; 

@@ -19,7 +19,7 @@
       <recover>false</recover>
     </job>
 
-    <trigger>
+    <!--<trigger>
       <simple>
         <name>sampleSimpleTrigger</name>
         <group>sampleSimpleGroup</group>
@@ -27,9 +27,32 @@
         <job-name>SampleJob</job-name>
         <job-group>SampleJob</job-group>
         <misfire-instruction>SmartPolicy</misfire-instruction>
-        <repeat-count>-1</repeat-count>
+        <repeat-count>0</repeat-count>
         <repeat-interval>1000</repeat-interval>
       </simple>
+    </trigger>-->
+
+    <job>
+      <name>RequestJob</name>
+      <group>RequestJob</group>
+      <description>监控服务</description>
+      <job-type>Law.Monitor.RequestJob,Law.Monitor</job-type>
+      <durable>true</durable>
+      <recover>false</recover>
+    </job>
+
+    <trigger>
+      <simple>
+        <name>RequestJobTrigger</name>
+        <group>RequestJobGroup</group>
+        <description>For Request Job</description>
+        <job-name>RequestJob</job-name>
+        <job-group>RequestJob</job-group>
+        <misfire-instruction>SmartPolicy</misfire-instruction>
+        <repeat-count>-1</repeat-count>
+        <repeat-interval>60000</repeat-interval> <!--1分钟-->
+      </simple>
     </trigger>
+    
   </schedule>
 </job-scheduling-data>

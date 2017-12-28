@@ -35,7 +35,7 @@ namespace Law.Monitor
                         string sendTime = JsonConfig.Get(key);
                         string timeInterval = JsonConfig.Get("timeInterval");
 
-                        if (string.IsNullOrEmpty(sendTime) && DateTime.Now > DateTime.Parse(sendTime).AddMinutes(int.Parse(timeInterval)))
+                        if (string.IsNullOrEmpty(sendTime) || DateTime.Now > DateTime.Parse(sendTime).AddMinutes(int.Parse(timeInterval)))
                         {
                             string toListStr = JsonConfig.Get("toList");
                             string[] toList = toListStr.Split(new char[] { ';' });

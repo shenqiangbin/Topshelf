@@ -81,8 +81,12 @@
     <Compile Include="Util\JsonConfig.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="config.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <Content Include="quartz_jobs.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <None Include="App.config" />
     <Content Include="log4net.config">

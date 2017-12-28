@@ -15,7 +15,7 @@ namespace Law.Monitor
 
         public void Execute(IJobExecutionContext context)
         {
-            logger.Error(DateTime.Now.ToString());
+            logger.Error("SampleJob:" + DateTime.Now.ToString());
         }
     }
 }

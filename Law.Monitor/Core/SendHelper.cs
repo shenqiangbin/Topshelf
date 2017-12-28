@@ -30,14 +30,21 @@ namespace Law.Monitor.Core
             catch (WebException ex)
             {
                 HttpWebResponse response = (HttpWebResponse)ex.Response;
-                result.Code = response.StatusCode;
-
-                if (response.StatusCode == HttpStatusCode.ServiceUnavailable)
+                if (response == null)
+                {
                     result.Success = false;
+                }
                 else
-                    result.Success = true;
+                {
+                    result.Code = response.StatusCode;
 
-                result.Msg = ex.Message;
+                    if (response.StatusCode == HttpStatusCode.ServiceUnavailable)
+                        result.Success = false;
+                    else
+                        result.Success = true;
+                }
+
+                result.Msg = ex.Status + ex.Message;
             }
 
             return result;

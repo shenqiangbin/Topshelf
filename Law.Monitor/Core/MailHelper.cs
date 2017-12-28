@@ -23,14 +23,22 @@ namespace Law.Monitor.Core
                 MailAddress from = new MailAddress(eamil);
                 System.Net.Mail.MailMessage MyMessage = new System.Net.Mail.MailMessage();
                 MyMessage.From = from;
-                foreach (var item in toList)
+
+                if (toList != null)
                 {
-                    MyMessage.To.Add(item);
+                    foreach (var item in toList)
+                    {
+                        MyMessage.To.Add(item);
+                    }
                 }
-                foreach (var item in copyList)
+                if (copyList != null)
                 {
-                    MyMessage.CC.Add(item);
+                    foreach (var item in copyList)
+                    {
+                        MyMessage.CC.Add(item);
+                    }
                 }
+                
                 MyMessage.Priority = System.Net.Mail.MailPriority.Normal;
                 MyMessage.IsBodyHtml = false;
                 MyMessage.IsBodyHtml = true;
