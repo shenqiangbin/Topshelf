@@ -1,5 +1,5 @@
 ﻿{
-  "monitorUrls": "http://localhost:8223/", //监控地址（多个时，分号分隔）
+  "monitorUrls": "http://localhost:8223/;http://localhost:8222/;http://alk.12348.gov.cn/", //监控地址（多个时，分号分隔）
   "timeInterval": 5, //通知时间间隔 单位：分钟
   "toList": "1969858717@qq.com", //通知人邮箱（多个时，分号分隔）
   "subject": "服务监控" //邮件标题

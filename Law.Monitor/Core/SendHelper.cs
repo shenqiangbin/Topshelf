@@ -19,12 +19,16 @@ namespace Law.Monitor.Core
 
                 request.Method = "Get";
                 request.ContentType = "text/html,application/xhtml+xml,application/xml,application/json";
+                request.Timeout = 80000; //8s
                 WebResponse response = request.GetResponse();
                 HttpWebResponse webResponse = (HttpWebResponse)response;
                 result.Code = webResponse.StatusCode;
                 if (webResponse.StatusCode == HttpStatusCode.OK)
                 {
                     result.Success = true;
+                }else
+                {
+                    result.Success = false;
                 }
             }
             catch (WebException ex)

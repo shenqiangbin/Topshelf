@@ -11,6 +11,8 @@ namespace Law.Monitor
     {
         static void Main(string[] args)
         {
+            //new Core.SendHelper().Send("http://alk.12348.gov.cn/");
+
             System.IO.Directory.SetCurrentDirectory(System.AppDomain.CurrentDomain.BaseDirectory);
 
             HostFactory.Run(x =>

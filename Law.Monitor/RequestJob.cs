@@ -40,7 +40,7 @@ namespace Law.Monitor
                             string toListStr = JsonConfig.Get("toList");
                             string[] toList = toListStr.Split(new char[] { ';' });
                             string subject = JsonConfig.Get("subject");
-                            string content = string.Format("{0} 访问无效 {1}", url, DateTime.Now);
+                            string content = string.Format("{0} <br/> {1} 访问无效 </br> {2} {3} ", DateTime.Now, url, sendResult.Code, sendResult.Msg);
                             bool sendMailResult = mailHelper.SendEmail(toList.ToList(), null, subject, content);
                             if (sendMailResult)
                                 JsonConfig.Add(key, DateTime.Now.ToString());
