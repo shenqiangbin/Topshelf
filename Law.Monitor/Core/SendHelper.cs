@@ -33,7 +33,6 @@ namespace Law.Monitor.Core
                 {
                     result.Success = false;
                 }
-                response.Close();
             }
             catch (WebException ex)
             {
@@ -57,7 +56,10 @@ namespace Law.Monitor.Core
             finally
             {
                 if (response != null)
+                {
                     response.Close();
+                    response.Dispose();
+                }                    
             }
 
             return result;
