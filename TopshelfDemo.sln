@@ -17,6 +17,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ant.Email", "Ant.Email\Ant.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Law.Monitor", "Law.Monitor\Law.Monitor.csproj", "{4F8D2BC5-684B-4202-8BFC-F7115B1EFE68}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ant.UserView", "Ant.UserView\Ant.UserView.csproj", "{CA7485C4-B906-4600-A7C1-E174D8B8B48A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ant.UserView.WinForm", "Ant.UserView.WinForm\Ant.UserView.WinForm.csproj", "{6B58B35D-0741-4ECC-8E0B-C888AF7819FE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +55,14 @@ Global
 		{4F8D2BC5-684B-4202-8BFC-F7115B1EFE68}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F8D2BC5-684B-4202-8BFC-F7115B1EFE68}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4F8D2BC5-684B-4202-8BFC-F7115B1EFE68}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA7485C4-B906-4600-A7C1-E174D8B8B48A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA7485C4-B906-4600-A7C1-E174D8B8B48A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA7485C4-B906-4600-A7C1-E174D8B8B48A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA7485C4-B906-4600-A7C1-E174D8B8B48A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B58B35D-0741-4ECC-8E0B-C888AF7819FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B58B35D-0741-4ECC-8E0B-C888AF7819FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B58B35D-0741-4ECC-8E0B-C888AF7819FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B58B35D-0741-4ECC-8E0B-C888AF7819FE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

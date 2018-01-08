@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- This file contains job definitions in schema version 2.0 format -->
+
+<job-scheduling-data xmlns="http://quartznet.sourceforge.net/JobSchedulingData" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.0">
+
+  <processing-directives>
+    <overwrite-existing-data>true</overwrite-existing-data>
+  </processing-directives>
+
+  <schedule>
+
+    <job>
+      <name>SampleJob</name>
+      <group>SampleJob</group>
+      <description>Sample job for Quartz Server</description>
+      <job-type>Ant.UserView.SampleJob,Ant.UserView</job-type>
+      <durable>true</durable>
+      <recover>false</recover>
+    </job>
+
+    <!--<trigger>
+      <simple>
+        <name>sampleSimpleTrigger</name>
+        <group>sampleSimpleGroup</group>
+        <description>Simple trigger to simply fire sample job</description>
+        <job-name>SampleJob</job-name>
+        <job-group>SampleJob</job-group>
+        <misfire-instruction>SmartPolicy</misfire-instruction>
+        <repeat-count>0</repeat-count>
+        <repeat-interval>1000</repeat-interval>
+      </simple>
+    </trigger>-->
+
+    <job>
+      <name>RequestJob</name>
+      <group>RequestJob</group>
+      <description>监控服务</description>
+      <job-type>Ant.UserView.RequestJob,Ant.UserView</job-type>
+      <durable>true</durable>
+      <recover>false</recover>
+    </job>
+
+    <trigger>
+      <simple>
+        <name>RequestJobTrigger</name>
+        <group>RequestJobGroup</group>
+        <description>For Request Job</description>
+        <job-name>RequestJob</job-name>
+        <job-group>RequestJob</job-group>
+        <misfire-instruction>SmartPolicy</misfire-instruction>
+        <repeat-count>-1</repeat-count>
+        <repeat-interval>5000</repeat-interval> <!--1分钟:60000-->
+      </simple>
+    </trigger>
+    
+  </schedule>
+</job-scheduling-data>
