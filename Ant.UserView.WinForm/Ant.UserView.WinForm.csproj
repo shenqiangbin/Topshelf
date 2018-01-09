@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="core\AppConfigHelper.cs" />
     <Compile Include="core\SendHelper.cs" />
     <Compile Include="core\WebProxyFactory.cs" />
     <Compile Include="core\WebProxyItem.cs" />

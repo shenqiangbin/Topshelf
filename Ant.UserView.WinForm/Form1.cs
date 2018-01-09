@@ -75,7 +75,7 @@ namespace Ant.UserView.WinForm
             string content = File.ReadAllText(proxyUrlFile);
             if (string.IsNullOrEmpty(content) || IsNeedRefresh())
             {
-                List<string> list = new WebProxyFactory().Get();
+                List<string> list = new WebProxyFactory().Get(1);
                 content = string.Join(",", list.ToArray());
                 //content = "http://27.38.154.143:9999,http://218.250.205.57:9064,http://118.161.133.2:9064";
                 File.WriteAllText(proxyUrlFile, content);

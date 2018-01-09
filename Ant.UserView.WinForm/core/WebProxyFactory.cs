@@ -11,39 +11,40 @@ namespace Ant.UserView.WinForm.core
     {
         private SendHelper _sendHelper = new SendHelper();
 
-        public List<string> Get()
+        public List<string> Get(int page)
         {
             List<string> list = new List<string>();
 
             string urlFormat = "http://www.66ip.cn/{0}.html";
-            int totalPage = GetTotalPage();
+            urlFormat = "http://www.66ip.cn/areaindex_19/{0}.html";
+            SendResult result = _sendHelper.Send(string.Format(urlFormat, page));
 
-            for (int i = 1; i <= totalPage; i++)
+            if (result.Success)
             {
-                SendResult result = _sendHelper.Send(string.Format(urlFormat, i));
+                var content = result.Msg;
+                NSoup.Nodes.Document htmlDoc = NSoup.NSoupClient.Parse(content);
 
-                if (result.Success)
+                var tableEle = htmlDoc.GetElementsByTag("table").Last;
+
+                var trs = tableEle.GetElementsByTag("tr");
+                for (int j = 1; j < trs.Count; j++)
                 {
-                    var content = result.Msg;
-                    NSoup.Nodes.Document htmlDoc = NSoup.NSoupClient.Parse(content);
-
-                    var tableEle = htmlDoc.GetElementsByTag("table").Last;
-
-                    var trs = tableEle.GetElementsByTag("tr");
-                    for (int j = 1; j < trs.Count; j++)
-                    {
-                        var tr = trs[j];
-                        string ipStr = tr.ChildNodes[0].ToString().Replace("<td>", "").Replace("</td>", "");
-                        string portStr = tr.ChildNodes[1].ToString().Replace("<td>", "").Replace("</td>", "");
-                        list.Add($"http://{ipStr}:{portStr}");
-                    }
+                    var tr = trs[j];
+                    string ipStr = tr.ChildNodes[0].ToString().Replace("<td>", "").Replace("</td>", "");
+                    string portStr = tr.ChildNodes[1].ToString().Replace("<td>", "").Replace("</td>", "");
+                    list.Add($"http://{ipStr}:{portStr}");
                 }
             }
+
+            //list.Add("http://111.230.113.142:1080");
+            list.Add("http://166.111.131.52:3128");
 
             return list;
         }
 
-        private int GetTotalPage()
+        //http://www.goubanjia.com/free/gngn/index.shtml
+
+        public int GetTotalPage()
         {
             int totalPage = 1;
             string urlFormat = "http://www.66ip.cn/{0}.html";
