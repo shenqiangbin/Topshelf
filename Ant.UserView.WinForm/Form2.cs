@@ -29,6 +29,8 @@ namespace Ant.UserView.WinForm
             this.webBrowser1.Navigate("http://www.baidu.com");
             this.webBrowser1.GoHome();
             this.webBrowser1.Navigated += WebBrowser1_Navigated;
+
+            webProxyFactory.GetFrom_Goubanjia(1);
         }
 
         private void _timer_Tick(object sender, EventArgs e)
