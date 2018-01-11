@@ -29,7 +29,7 @@ namespace Ant.UserView.WinForm
         public Form2()
         {
             InitializeComponent();
-            this.webBrowser1.Navigate("http://www.baidu.com");
+            //this.webBrowser1.Navigate("http://www.baidu.com");
             this.webBrowser1.GoHome();
             this.webBrowser1.Navigated += WebBrowser1_Navigated;
 
@@ -50,7 +50,8 @@ namespace Ant.UserView.WinForm
         {
             if (!chkEnableProxy.Checked)
             {
-                this.webBrowser1.Navigate("http://www.baidu.com");
+                ShowStatus($"访问{txtUrl.Text}中");
+                this.webBrowser1.Navigate(txtUrl.Text);
             }
             else
             {
@@ -113,7 +114,7 @@ namespace Ant.UserView.WinForm
             List<string> list = new List<string>();
             try
             {
-                string sql = "SELECT * FROM proxyip order by createtime desc limit 0,100;";
+                string sql = "SELECT * FROM proxyip order by createtime desc limit 0,50;";
                 MySqlDataAdapter adapter = new MySqlDataAdapter(sql, conn);
                 DataTable dt = new DataTable();
                 adapter.Fill(dt);
@@ -136,8 +137,7 @@ namespace Ant.UserView.WinForm
         {
             if (e.Url.ToString() == "https://www.baidu.com/")
             {
-                ShowStatus($"访问{txtUrl.Text}中");
-                this.webBrowser1.Navigate(txtUrl.Text);
+                
             }
 
         }
@@ -154,8 +154,11 @@ namespace Ant.UserView.WinForm
             lblIp.Text = $"当前代理服务器：{url}";
             new IEProxy(url).RefreshIESettings();
 
-            ShowStatus("访问百度页面中");
-            this.webBrowser1.Navigate("http://www.baidu.com");
+            //ShowStatus("访问百度页面中");
+            //this.webBrowser1.Navigate("http://www.baidu.com");
+
+            ShowStatus($"访问{txtUrl.Text}中");
+            this.webBrowser1.Navigate(txtUrl.Text);
 
         }
 
