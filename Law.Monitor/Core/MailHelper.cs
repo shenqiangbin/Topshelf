@@ -42,7 +42,7 @@ namespace Law.Monitor.Core
                 MyMessage.Priority = System.Net.Mail.MailPriority.Normal;
                 MyMessage.IsBodyHtml = false;
                 MyMessage.IsBodyHtml = true;
-
+                
                 MyMessage.Body = body;
                 MyMessage.BodyEncoding = System.Text.Encoding.UTF8;
                 MyMessage.Subject = subject;
@@ -50,10 +50,17 @@ namespace Law.Monitor.Core
                 //这里使用你服务器端发送的邮箱smtp协议 新浪邮箱：smtp.sina.com  网易邮箱：smtp.126.com  QQ邮箱：smtp.qq.com ，QQ企业邮箱的：smtp.exmail.qq.com
                 string SmtpServer = "smtp.qq.com";
                 SmtpClient client = new SmtpClient(SmtpServer, 25);
-                System.Net.NetworkCredential cred = new System.Net.NetworkCredential(eamil, pwd);
+                client.DeliveryMethod = System.Net.Mail.SmtpDeliveryMethod.Network;
+                System.Net.NetworkCredential cred = new System.Net.NetworkCredential(eamil, pwd);                
+
                 client.EnableSsl = true;
                 client.UseDefaultCredentials = false;
                 client.Credentials = cred;
+                System.Net.ServicePointManager.ServerCertificateValidationCallback = (sender, cert, chain, error) =>
+                {
+                    return true;
+                };
+
                 client.Send(MyMessage);
 
                 return true;
