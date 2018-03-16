@@ -1,4 +1,5 @@
 ﻿using Ant.UserView.WinForm.core;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,22 +23,35 @@ namespace Ant.UserView.WinForm
         string proxyUrlFile = "ProxyUrl";
         private int enableNumber = 0;
 
+        private static string ConnStr = ConfigurationManager.ConnectionStrings["MySqlStr"].ToString();
+        private MySqlConnection conn = null;
 
         public Form2()
         {
             InitializeComponent();
-            this.webBrowser1.Navigate("http://www.baidu.com");
+            //this.webBrowser1.Navigate("http://www.baidu.com");
             this.webBrowser1.GoHome();
             this.webBrowser1.Navigated += WebBrowser1_Navigated;
 
-            webProxyFactory.GetFrom_Goubanjia(1);
+            conn = new MySqlConnection(ConnStr);
+            if (conn.State == System.Data.ConnectionState.Closed)
+                conn.Open();
+
+            this.Disposed += Form2_Disposed;
+        }
+
+        private void Form2_Disposed(object sender, EventArgs e)
+        {
+            if (this.conn.State != ConnectionState.Closed)
+                this.conn.Close();
         }
 
         private void _timer_Tick(object sender, EventArgs e)
         {
             if (!chkEnableProxy.Checked)
             {
-                this.webBrowser1.Navigate("http://www.baidu.com");
+                ShowStatus($"访问{txtUrl.Text}中");
+                this.webBrowser1.Navigate(txtUrl.Text);
             }
             else
             {
@@ -51,7 +65,8 @@ namespace Ant.UserView.WinForm
                         i = 1;
 
                     ShowStatus("获取代理服务器列表...");
-                    urls = webProxyFactory.Get(i);
+                    //urls = webProxyFactory.Get(i);
+                    urls = GetUrls();
                     ShowStatus("代理服务器列表完成...");
 
                     lblInt.Text = $"当前页：{i}";
@@ -67,8 +82,9 @@ namespace Ant.UserView.WinForm
                 urls.RemoveAt(0);
 
                 ShowStatus($"{url}代理可用性验证中...");
-                SendResult result = new SendHelper().Send("http://www.baidu.com", new WebProxyItem { Url = url });
-                if (result.Success && result.Msg.Contains("domain:\"http://www.baidu.com\""))
+                //SendResult result = new SendHelper().Send("http://www.sqber.com", new WebProxyItem { Url = url });                
+                //if (result.Success && result.Msg.Contains("indexcontainer"))
+                if (true)
                 {
                     ShowStatus($"{url} 代理可用");
                     enableNumber++;
@@ -76,7 +92,7 @@ namespace Ant.UserView.WinForm
 
                     try
                     {
-                        File.AppendAllText(proxyUrlFile, url + ",");
+                        //File.AppendAllText(proxyUrlFile, url + ",");
                         HandThePage(url);
                     }
                     catch (Exception ex)
@@ -91,12 +107,37 @@ namespace Ant.UserView.WinForm
             }
         }
 
+        private List<string> GetUrls()
+        {
+            if (conn.State == System.Data.ConnectionState.Closed)
+                conn.Open();
+            List<string> list = new List<string>();
+            try
+            {
+                string sql = "SELECT * FROM proxyip order by createtime desc limit 0,50;";
+                MySqlDataAdapter adapter = new MySqlDataAdapter(sql, conn);
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+                foreach (DataRow item in dt.Rows)
+                {
+                    list.Add(item[1].ToString());
+                }
+                conn.Dispose();
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return list;
+
+        }
+
         private void WebBrowser1_Navigated(object sender, WebBrowserNavigatedEventArgs e)
         {
             if (e.Url.ToString() == "https://www.baidu.com/")
             {
-                ShowStatus($"访问{txtUrl.Text}中");
-                this.webBrowser1.Navigate(txtUrl.Text);
+                
             }
 
         }
@@ -113,8 +154,11 @@ namespace Ant.UserView.WinForm
             lblIp.Text = $"当前代理服务器：{url}";
             new IEProxy(url).RefreshIESettings();
 
-            ShowStatus("访问百度页面中");
-            this.webBrowser1.Navigate("http://www.baidu.com");
+            //ShowStatus("访问百度页面中");
+            //this.webBrowser1.Navigate("http://www.baidu.com");
+
+            ShowStatus($"访问{txtUrl.Text}中");
+            this.webBrowser1.Navigate(txtUrl.Text);
 
         }
 
