@@ -57,8 +57,8 @@ namespace Law.Monitor.Core
             {
                 if (response != null)
                 {
-                    response.Close();
-                    response.Dispose();
+                    //response.Close();
+                    //response.Dispose();
                 }                    
             }
 
