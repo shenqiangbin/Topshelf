@@ -108,25 +108,32 @@ namespace Ant.UserView.WinForm.core
             List<string> list = new List<string>();
             foreach (Node item in td.ChildNodes)
             {
-                if (item.Attributes["style"].Contains("display:none"))
+                if (item.Attributes["style"].Contains("none"))
                     continue;
 
-                var str = item.OuterHtml();
+                var str = item.OuterHtml().Replace("\n", "");
+
+                if (str.Trim() == ":")
+                {
+                    list.Add(str);
+                    continue;
+                }
+
                 string RegexStr = ">(.+)<";
 
-                string tmpStr = string.Format("<{0}[^>]*?>(?<Text>[^<]*)</{1}>", title, title); //获取<title>之间内容  
+                //string tmpStr = string.Format("<{0}[^>]*?>(?<Text>[^<]*)</{1}>", title, title); //获取<title>之间内容  
 
-                Match TitleMatch = Regex.Match(str, tmpStr, RegexOptions.IgnoreCase);
+                //Match TitleMatch = Regex.Match(str, tmpStr, RegexOptions.IgnoreCase);
 
-                string result = TitleMatch.Groups["Text"].Value;
-                return result;
+                //string result = TitleMatch.Groups["Text"].Value;
+                //return result;
 
                 if (Regex.IsMatch(str, RegexStr))
                 {
                     Match match = Regex.Match(str, RegexStr);
                     str = match.Value.Replace(">", "").Replace("<", "");
                     if (!string.IsNullOrEmpty(str))
-                        list.Add(str);
+                        list.Add(str.Trim());
                 }
             }
             return string.Join("", list.ToArray());

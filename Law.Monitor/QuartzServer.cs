@@ -1,6 +1,7 @@
 using Quartz;
 using Quartz.Impl;
 using System;
+using System.Linq;
 using Topshelf;
 using Topshelf.Logging;
 
@@ -51,6 +52,17 @@ namespace Law.Monitor
 
         public bool Stop(HostControl hostControl)
         {
+            try
+            {
+                string toListStr = Util.JsonConfig.Get("toList");
+                string[] toList = toListStr.Split(new char[] { ';' });
+                string machineName = Util.JsonConfig.Get("machineName");
+                new Core.MailHelper().SendEmail(toList.ToList(), null, "监控服务停止通知", machineName + " 监控服务停止了");
+            }
+            catch (Exception ex)
+            {
+                logger.Error("服务停止邮件通知失败：" + ex.Message);
+            }
             try
             {
                 scheduler.Shutdown(false);

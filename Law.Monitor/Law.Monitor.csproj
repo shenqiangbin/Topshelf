@@ -55,6 +55,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -72,18 +73,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\MailHelper.cs" />
+    <Compile Include="Core\ServiceMonitorHelper.cs" />
     <Compile Include="Core\SendHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QuartzServer.cs" />
+    <Compile Include="ServiceJob.cs" />
     <Compile Include="RequestJob.cs" />
     <Compile Include="SampleJob.cs" />
     <Compile Include="Util\JsonConfig.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="config.json">
+    <Content Include="config.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    </Content>
     <Content Include="quartz_jobs.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>

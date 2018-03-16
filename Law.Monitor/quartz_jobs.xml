@@ -41,7 +41,7 @@
       <recover>false</recover>
     </job>
 
-    <trigger>
+    <!--<trigger>
       <simple>
         <name>RequestJobTrigger</name>
         <group>RequestJobGroup</group>
@@ -50,7 +50,30 @@
         <job-group>RequestJob</job-group>
         <misfire-instruction>SmartPolicy</misfire-instruction>
         <repeat-count>-1</repeat-count>
-        <repeat-interval>60000</repeat-interval> <!--1分钟-->
+        <repeat-interval>60000</repeat-interval> --><!--1分钟--><!--
+      </simple>
+    </trigger>-->
+
+    <job>
+      <name>ServiceJob</name>
+      <group>ServiceJob</group>
+      <description>监控服务</description>
+      <job-type>Law.Monitor.ServiceJob,Law.Monitor</job-type>
+      <durable>true</durable>
+      <recover>false</recover>
+    </job>
+
+    <trigger>
+      <simple>
+        <name>ServiceJobTrigger</name>
+        <group>ServiceJobGroup</group>
+        <description>For Service Job</description>
+        <job-name>ServiceJob</job-name>
+        <job-group>ServiceJob</job-group>
+        <misfire-instruction>SmartPolicy</misfire-instruction>
+        <repeat-count>-1</repeat-count>
+        <repeat-interval>60000</repeat-interval>
+        <!--1分钟-->
       </simple>
     </trigger>
     
