@@ -15,8 +15,8 @@ namespace Law.Monitor.Core
         public bool SendEmail(List<string> toList, List<string> copyList, string subject, string body)
         {
             //如果是QQ邮箱，需要启用POP3服务，且密码使用的是 授权码，而不是密码
-            string eamil = "1348907384@qq.com";
-            string pwd = "xkwmjgjupmwjfhbc";
+            string eamil = "";
+            string pwd = "";
 
             try
             {
